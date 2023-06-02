@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Responsive Table + Detail View</title>
+  <title>Data Member</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="./style.css">
 
@@ -10,17 +10,14 @@
 <body>
 <!-- partial:index.partial.html -->
 <h1>
-  Providers
+  Member
 </h1>
-<p>
-  (An example table + detail view scenario)
-</p>
 <main>
-  <table>
+  <table id="data-table">
     <thead>
       <tr>
         <th>
-          Provider Name
+          Nama
         </th>
         <th>
           E-mail
@@ -31,53 +28,14 @@
     <tfoot>
       <tr>
         <th colspan='3'>
-          Year: 2014
+          Year: 2023
         </th>
       </tr>
     </tfoot>
-    <tbody>
+    <tbody id="table-body">
       <tr>
         <td data-title='Provider Name'>
           Iacob Geaorgescu
-        </td>
-        <td data-title='E-mail'>
-          e-mail@test-email.com
-        </td>
-        <td class='select'>
-          <a class='button' href='#'>
-            Select
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td data-title='Provider Name'>
-          Julius Neumann
-        </td>
-        <td data-title='E-mail'>
-          e-mail@test-email.com
-        </td>
-        <td class='select'>
-          <a class='button' href='#'>
-            Select
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td data-title='Provider Name'>
-          Christoph Koller
-        </td>
-        <td data-title='E-mail'>
-          e-mail@test-email.com
-        </td>
-        <td class='select'>
-          <a class='button' href='#'>
-            Select
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td data-title='Provider Name'>
-          Bram Lemmens
         </td>
         <td data-title='E-mail'>
           e-mail@test-email.com
@@ -140,6 +98,31 @@
 </main>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
+
+  <script type="text/javascript">
+    fetch('http://backend-env.eba-p6a8jejd.ap-southeast-2.elasticbeanstalk.com/akun')
+      .then(response => response.json())
+      .then(data => {
+        // Get the table body element
+        const tableBody = document.getElementById('table-body');
+
+        // Iterate over the data and create table rows
+        $i = 1;
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td data-title='Provider Name'>${user.nama}</td>
+            <td data-title='E-mail'>${user.email}</td>
+            <td class='select'><a class='button' href='#'></a></td>
+          `;
+          $i++;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  </script>
 
 </body>
 </html>
