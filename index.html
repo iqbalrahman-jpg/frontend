@@ -48,74 +48,25 @@
       </tr>
     </tbody>
   </table>
-  <div class='detail'>
-    <div class='detail-container'>
-      <dl>
-        <dt>
-          Provider Name
-        </dt>
-        <dd>
-          John Doe
-        </dd>
-        <dt>
-          E-mail
-        </dt>
-        <dd>
-          email@example.com
-        </dd>
-        <dt>
-          City
-        </dt>
-        <dd>
-          Detroit
-        </dd>
-        <dt>
-          Phone-Number
-        </dt>
-        <dd>
-          555-555-5555
-        </dd>
-        <dt>
-          Last Update
-        </dt>
-        <dd>
-          Jun 20 2014
-        </dd>
-        <dt>
-          Notes
-        </dt>
-        <dd>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-        </dd>
-      </dl>
-    </div>
-    <div class='detail-nav'>
-      <button class='close'>
-        Close
-      </button>
-    </div>
-  </div>
 </main>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
 
   <script type="text/javascript">
-    fetch('http://backend-env.eba-p6a8jejd.ap-southeast-2.elasticbeanstalk.com/akun')
+    fetch("http://backend-env.eba-p6a8jejd.ap-southeast-2.elasticbeanstalk.com/akun")
       .then(response => response.json())
       .then(data => {
         // Get the table body element
         const tableBody = document.getElementById('table-body');
 
         // Iterate over the data and create table rows
-        $i = 1;
         data.forEach(user => {
           const row = document.createElement('tr');
           row.innerHTML = `
             <td data-title='Provider Name'>${user.nama}</td>
             <td data-title='E-mail'>${user.email}</td>
-            <td class='select'><a class='button' href='#'></a></td>
+            <td class='select'><a class='button' href='#'>edit</a></td>
           `;
-          $i++;
           tableBody.appendChild(row);
         });
       })
